@@ -1,124 +1,257 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"stonesmover.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="linux crontab 计划任务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="crontab">
+<meta property="og:url" content="https://stonesmover.github.io/2023/08/01/crontab/index.html">
+<meta property="og:site_name" content="你像一束风">
+<meta property="og:description" content="linux crontab 计划任务">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-01T06:21:53.000Z">
+<meta property="article:modified_time" content="2023-11-07T08:36:33.411Z">
+<meta property="article:author" content="Stonesmover">
+<meta property="article:tag" content="crontab">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://stonesmover.github.io/2023/08/01/crontab/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://stonesmover.github.io/2023/08/01/crontab/","path":"2023/08/01/crontab/","title":"crontab"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>crontab | 你像一束风</title>
   
-  <title>crontab | 你像一束风</title>
-
-  
-  <meta name="author" content="zzx">
-  
-
-  
-  <meta name="description" content="安装crontab
-1yum install crontabs 
-
-查看定时任务
-1crontab -l
-
-设置定时任务
-1crontab -e
-
-查看crontab状态
-1systemctl status crond.service
-
-启动crontab
-1systemctl start cron">
-  
-
-  
-  
-  <meta name="keywords" content="crontab">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="crontab"/>
-
-  <meta property="og:site_name" content="你像一束风"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="你像一束风" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-<meta name="generator" content="Hexo 6.3.0"></head>
 
 
-<body>
-<div class="blog">
-  <div class="content">
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">你像一束风</a>
-    </h1>
-    <p class="site-description"></p>
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">home</a></li>
-      
-        <li><a href="/tags">Tags</a></li>
-      
-        <li><a href="/life">life</a></li>
-      
-        <li><a href="/about">about</a></li>
-      
-    </ul>
-  </nav>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">你像一束风</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
 </header>
-
-    <main class="site-main posts-loop">
-    <article>
-
+        
   
-    
-    <h3 class="article-title"><span>crontab</span></h3>
-    
-  
+  <aside class="sidebar">
 
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2023/08/01/crontab/" rel="bookmark">
-        <time class="entry-date published" datetime="2023-08-01T05:14:31.000Z">
-          2023-08-01
-        </time>
-      </a>
-    </span>
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Stonesmover</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/StonesMover" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;StonesMover" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
   </div>
 
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
 
   
 
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>安装crontab</p>
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://stonesmover.github.io/2023/08/01/crontab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Stonesmover">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="你像一束风">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="crontab | 你像一束风">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          crontab
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-08-01 14:21:53" itemprop="dateCreated datePublished" datetime="2023-08-01T14:21:53+08:00">2023-08-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-07 16:36:33" itemprop="dateModified" datetime="2023-11-07T16:36:33+08:00">2023-11-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>linux crontab 计划任务</p>
+<p><strong>安装crontab</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install crontabs </span><br></pre></td></tr></table></figure>
+
+<!--more-->
 
 <p>查看定时任务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -l</span><br></pre></td></tr></table></figure>
 
-<p>设置定时任务</p>
+<p><strong>设置定时任务</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
 
-<p>查看crontab状态</p>
+
+
+<p><strong>查看crontab状态</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status crond.service</span><br></pre></td></tr></table></figure>
 
-<p>启动crontab</p>
+<p><strong>启动crontab</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start crond.service</span><br></pre></td></tr></table></figure>
 
-<p>关闭crontab</p>
+<p><strong>关闭crontab</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop crond.service</span><br></pre></td></tr></table></figure>
 
-<p>重启crontab</p>
+<p><strong>重启crontab</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart crond.service</span><br></pre></td></tr></table></figure>
 
 
@@ -126,30 +259,67 @@
 <p>每分钟执行一次</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改/添加定时任务</span></span><br><span class="line">crontab -e</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">每分钟把hello world字符串写入/home/string.txt文件中</span></span><br><span class="line">* * * * * echo &quot;hello world&quot; &gt;&gt; /home/string.txt</span><br><span class="line">更多案例</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改/添加定时任务</span></span><br><span class="line">crontab -e</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">每天3点执行</span></span><br><span class="line">* 3 * * * 执行的语句</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">每天18点30分执行</span></span><br><span class="line">30 18 * * * 执行的语句</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">每个月的1号的12点15分执行</span></span><br><span class="line">15 12 1 * *  执行的语句</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">每年的3月1号的11点45分执行</span></span><br><span class="line">45 11 1 3 * 执行的语句</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">每周三的16点30分执行</span></span><br><span class="line">30 16 * * 3 执行的语句</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">第1列表示分钟1～59 每分钟用或者 /1表示</span> </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">第2列表示小时1～23（0表示0点）</span> </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">第3列表示日期1～31</span> </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">第4列表示月份1～12</span> </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">第5列标识号星期0～6（0表示星期天）</span> </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">第6列要运行的命令</span></span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
     
-
     
     
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/crontab/">crontab</a>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/crontab/" rel="tag"># crontab</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/01/%E5%B8%86%E8%BD%AF%E4%BD%BF%E7%94%A8API%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE/" rel="prev" title="帆软使用API接口数据">
+                  <i class="fa fa-angle-left"></i> 帆软使用API接口数据
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
     </span>
-    
+    <span class="author" itemprop="copyrightHolder">Stonesmover</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
 
     </div>
+  </footer>
 
-    
-  </div>
-</article>
+  
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
 
@@ -158,24 +328,11 @@
 
 
 
+  
 
 
 
-    </main>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2023 zzx
-    
-  </p>
-</footer>
-    
-    
-  </div>
-</div>
+
 </body>
 </html>
