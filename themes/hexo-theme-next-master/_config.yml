@@ -106,10 +106,10 @@ menu:
   #sitemap: /sitemap.xml || fa fa-sitemap
   #commonweal: /404/ || fa fa-heartbeat
 
-
+# 导航栏图标和标志
 menu_settings:
   icons: true
-  badges: false
+  badges: true
 
 
 # ---------------------------------------------------------------
@@ -135,7 +135,7 @@ sidebar:
   display: post
 
   # Sidebar padding in pixels.
-  padding: 18
+  padding: 50
   # Sidebar offset from top menubar in pixels (only for Pisces | Gemini).
   offset: 12
 
@@ -146,9 +146,9 @@ avatar:
   # 将头像放至主题目录下 (source/images): /images/avatar.gif
   # 将头像放至站点目录下 (source/uploads): /uploads/avatar.gif
   # 或者任何头像URL: http(s)://example.com/avatar.png
-  url: #/images/avatar.jpg
+  url: /images/avatar.gif
   # 如果为 true, 头像将会显示为圆形.
-  rounded: false
+  rounded: true
   # 头像透明度，取值从0到1,1表示完全不透明.
   opacity: 1
   # 如果为 true, 当光标移动至头像时，头像会旋转.
@@ -268,9 +268,13 @@ post_wordcount:
   min2read: true #单篇阅读时长
   totalcount: true #站点总字数
   separated_meta: true
+
 symbols_count_time:
-  separated_meta: true
-  item_text_total: false
+  separated_meta: true  # 是否换行显示 字数统计 及 阅读时长
+  item_text_post: true  # 文章 字数统计 阅读时长 使用图标 还是 文本表示
+  item_text_total: false # 博客底部统计 字数统计 阅读时长 使用图标 还是 文本表示
+  awl: 4 # awl（Average Word Length）的数值是设定多少字符统计为一个字（word），中文博客建议设置为 2
+  wpm: 275 # （Words Per Minute）是假设的读者阅读速度，多少字（word）统计为阅读时长一分钟。
 
 # Use icon instead of the symbol # to indicate the tag at the bottom of the post
 tag_icon: false
@@ -395,9 +399,9 @@ back2top:
   # 是否启用点击返回顶部按钮
   enable: true
   # 是否在侧边栏显示点击返回顶部按钮
-  sidebar: true
+  sidebar: false
   # 是否在返回顶部按钮显示已滚动百分比
-  scrollpercent: false
+  scrollpercent: true
 
 
 # Reading progress bar
@@ -638,8 +642,10 @@ quicklink:
 
 # Use Animate.css to animate everything.
 # For more information: https://animate.style
+
+#关闭动画效果
 motion:
-  enable: true
+  enable: false
   async: false
   transition:
     # All available transition variants: https://theme-next.js.org/animate/
@@ -872,10 +878,12 @@ algolia_search:
 
 # Local Search
 # Dependencies: https://github.com/next-theme/hexo-generator-searchdb
+#本地搜索
 local_search:
-  enable: false
+  enable: true
   # If auto, trigger search by changing input.
   # If manual, trigger search by pressing enter key or search button.
+  # 则搜索时输入自动出现结果，选 manual 则搜索时输入完成需手动点击回车或搜索按钮出结果
   trigger: auto
   # Show top n results per article, show all results by setting to -1
   top_n_per_article: 1

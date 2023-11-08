@@ -40,7 +40,9 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+
+# 在文章同名路径存放图片
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
@@ -98,6 +100,13 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: hexo-theme-next-master
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+
 
 jsonContent:
     meta : false
