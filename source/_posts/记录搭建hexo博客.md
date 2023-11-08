@@ -20,6 +20,7 @@ Hexo 虽然有点麻烦，但是可以放到Githu上。就选它了
 ## 创建新的分支
 
 由于上班回家两台终端，所以创建一个新的分支 hexo 存放博客源文件
+master 分支 存放生成的网页文件
 
 {% asset_img newbranch.jpg This is an test image %}
 
