@@ -99,6 +99,28 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: hexo-theme-next-master
 
+jsonContent:
+    meta : false
+    pages : false
+    posts :
+      title : true
+      date : true
+      path : true
+      text : true
+      raw : false
+      content : false
+      slug : false
+      updated : false
+      comments : false
+      link : false
+      permalink : false
+      excerpt : false
+      categories : false
+      tages : false
+
+
+
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
