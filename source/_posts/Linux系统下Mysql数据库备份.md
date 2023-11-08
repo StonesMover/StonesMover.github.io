@@ -24,6 +24,7 @@ mkdir /data/winback/POS
 ```shell
 sudo mount -t cifs -o username=username,password=password //192.168.3.12/bk/pos /data/winback/POS
 ```
+<!--more-->
 
 ```
 cifs是Common Internet File System，通用internet文件系统
