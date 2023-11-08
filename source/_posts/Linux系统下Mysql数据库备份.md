@@ -1,7 +1,7 @@
 ---
 title: Linux系统下Mysql数据库备份
 date: 2023-11-08 13:32:56
-categories: Linux
+categories: 笔记
 tags: 
 - Linux
 - Mysql

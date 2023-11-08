@@ -1,7 +1,7 @@
 ---
 title: 记录搭建hexo博客
 date: 2023-11-08 09:03:56
-categories: hexo
+categories: 笔记
 tags: hexo
 ---
 
