@@ -880,7 +880,7 @@ algolia_search:
 # Dependencies: https://github.com/next-theme/hexo-generator-searchdb
 #本地搜索
 local_search:
-  enable: true
+  enable: false
   # If auto, trigger search by changing input.
   # If manual, trigger search by pressing enter key or search button.
   # 则搜索时输入自动出现结果，选 manual 则搜索时输入完成需手动点击回车或搜索按钮出结果
