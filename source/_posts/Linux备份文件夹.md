@@ -4,13 +4,14 @@ date: 2023-11-22 16:16:32
 categories: Linux
 tags: Linux
 ---
-
-
 #### 1、创建备份目标文件夹
 
 ```shell
 mkdir /mnt/CRM
 ```
+
+<!--more-->
+
 
 #### 2、创建备份脚本
 
