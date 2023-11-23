@@ -1,18 +1,17 @@
 ---
-title: Docker容器内备份Mysql数据库
-date: 2023-11-22 19:41:10
-categories:
-tags
+title: Docker容器mysql数据库数据导出备份
+date: 2023-11-23 09:17:13
+categories: 笔记
+tags: Linux
 ---
+
 #### 查找mysql容器id
 
 ```shell
 docker ps -aqf "name=mysql"
 ```
 
-
 <!--more-->
-
 
 #### 自动备份脚本
 
