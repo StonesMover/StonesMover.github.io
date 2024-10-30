@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>我家云折腾记录</title>
+    <url>/2024/10/30/%E6%88%91%E5%AE%B6%E4%BA%91%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<div class=".article-gallery"><p>本来已经根据<a href="https://post.smzdm.com/p/az50epz5/">阿文菌</a>的文章刷好了，但是想刷一个干净的固件自己学习一下</p>
+<p><a href="https://bbs.nasdiyer.com/thread-21111-1-1.html">参考文章</a></p>
+<h2 id="１、刷ophub-固件"><a href="#１、刷ophub-固件" class="headerlink" title="１、刷ophub 固件"></a>１、刷ophub 固件</h2><p><a href="https://github.com/ophub/amlogic-s9xxx-armbian/releases" title="中间是rockchip_chainedbox的固件">固件下载地址</a></p>
+<p><a href="https://post.smzdm.com/p/az50epz5/">刷机教程</a></p>
+<h2 id="2、设置硬盘自动挂载"><a href="#2、设置硬盘自动挂载" class="headerlink" title="2、设置硬盘自动挂载"></a>2、设置硬盘自动挂载</h2><p>查看硬盘设备</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">lsblk</span><br></pre></td></tr></table></figure>
+<p>创建挂载点目录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /mnt/2t</span><br></pre></td></tr></table></figure>
+
+<p>获取硬盘分区的UUID</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo blkid</span><br></pre></td></tr></table></figure>
+<p>找到与你的硬盘对应的 UUID，并记录下来。</p>
+<p>编辑 &#x2F;etc&#x2F;fstab</p>
+<p>在 &#x2F;etc&#x2F;fstab 文件中添加一条新记录，以便在系统启动时自动挂载硬盘。打开 &#x2F;etc&#x2F;fstab 文件编辑：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo nano /etc/fstab</span><br></pre></td></tr></table></figure>
+<p>添加一行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">UUID=your_UUID_here /mnt/2t ext4 defaults 0 0</span><br></pre></td></tr></table></figure>
+
+<p>重启测试是否自动挂载</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo reboot</span><br><span class="line">df -h</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、安装Samba服务"><a href="#3、安装Samba服务" class="headerlink" title="3、安装Samba服务"></a>3、安装Samba服务</h2><p>安装 Samba</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y samba</span><br></pre></td></tr></table></figure>
+
+<p>配置 Samba</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
+
+<p>添加硬盘的共享目录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[Media]</span><br><span class="line">comment = Media Storage</span><br><span class="line">path = /mnt/2t/Media</span><br><span class="line">browseable = yes</span><br><span class="line">read only = no</span><br><span class="line">guest ok = no</span><br><span class="line">create mask = 0775</span><br><span class="line">directory mask = 0775</span><br><span class="line">force user = media</span><br><span class="line">valid users = media</span><br><span class="line">public = no</span><br></pre></td></tr></table></figure>
+<p>创建共享用户</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo adduser media</span><br></pre></td></tr></table></figure>
+<p>设置Samba密码</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo smbpasswd -a media</span><br></pre></td></tr></table></figure>
+<p>设置目录权限</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo chown -R media:media /mnt/2t/Media</span><br><span class="line">sudo chmod -R 775 /mnt/2t/Media</span><br></pre></td></tr></table></figure>
+<p>重启Samba服务</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart smbd</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、开启防火墙"><a href="#4、开启防火墙" class="headerlink" title="4、开启防火墙"></a>4、开启防火墙</h2><p>安装</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt install -y ufw</span><br></pre></td></tr></table></figure>
+<p>启用UFW</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo ufw enable</span><br><span class="line">sudo ufw status</span><br></pre></td></tr></table></figure>
+<p>添加允许 Samba 服务通过的规则。Samba 默认使用 TCP&#x2F;UDP 端口 137、138、139 和 445</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo ufw allow 137/tcp</span><br><span class="line">sudo ufw allow 137/udp</span><br><span class="line">sudo ufw allow 138/tcp</span><br><span class="line">sudo ufw allow 138/udp</span><br><span class="line">sudo ufw allow 139/tcp</span><br><span class="line">sudo ufw allow 445/tcp</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="！！！！！！！！！！"><a href="#！！！！！！！！！！" class="headerlink" title="！！！！！！！！！！"></a>！！！！！！！！！！</h1><h2 id="完蛋了，22-端口忘记开了"><a href="#完蛋了，22-端口忘记开了" class="headerlink" title="完蛋了，22 端口忘记开了"></a>完蛋了，22 端口忘记开了</h2></div>]]></content>
+      <tags>
+        <tag>我家云</tag>
+      </tags>
+  </entry>
+</search>
