@@ -178,19 +178,19 @@
             <div class="post-head-meta-center">
         
                 
-                    <span>最近更新：2024-10-30</span> 
+                    <span>最近更新：2024-11-08</span> 
                 
                 
                     
                         &nbsp; | &nbsp;
                     
-                     <span>字数总计：364</span>
+                     <span>字数总计：516</span>
                 
                 
                     
                         &nbsp; | &nbsp;
                     
-                    <span>阅读估时：1分钟</span>
+                    <span>阅读估时：2分钟</span>
                 
                 
                     
@@ -211,15 +211,18 @@
 <p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/az50epz5/">刷机教程</a></p>
 <h2 id="2、设置硬盘自动挂载"><a href="#2、设置硬盘自动挂载" class="headerlink" title="2、设置硬盘自动挂载"></a>2、设置硬盘自动挂载</h2><p>查看硬盘设备</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk</span><br></pre></td></tr></table></figure>
+
 <p>创建挂载点目录</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /mnt/2t</span><br></pre></td></tr></table></figure>
 
 <p>获取硬盘分区的UUID</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo blkid</span><br></pre></td></tr></table></figure>
+
 <p>找到与你的硬盘对应的 UUID，并记录下来。</p>
 <p>编辑 &#x2F;etc&#x2F;fstab</p>
 <p>在 &#x2F;etc&#x2F;fstab 文件中添加一条新记录，以便在系统启动时自动挂载硬盘。打开 &#x2F;etc&#x2F;fstab 文件编辑：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/fstab</span><br></pre></td></tr></table></figure>
+
 <p>添加一行</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=your_UUID_here /mnt/2t ext4 defaults 0 0</span><br></pre></td></tr></table></figure>
 
@@ -234,24 +237,40 @@
 
 <p>添加硬盘的共享目录</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Media]</span><br><span class="line">comment = Media Storage</span><br><span class="line">path = /mnt/2t/Media</span><br><span class="line">browseable = yes</span><br><span class="line">read only = no</span><br><span class="line">guest ok = no</span><br><span class="line">create mask = 0775</span><br><span class="line">directory mask = 0775</span><br><span class="line">force user = media</span><br><span class="line">valid users = media</span><br><span class="line">public = no</span><br></pre></td></tr></table></figure>
+
 <p>创建共享用户</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo adduser media</span><br></pre></td></tr></table></figure>
+
 <p>设置Samba密码</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo smbpasswd -a media</span><br></pre></td></tr></table></figure>
+
 <p>设置目录权限</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R media:media /mnt/2t/Media</span><br><span class="line">sudo chmod -R 775 /mnt/2t/Media</span><br></pre></td></tr></table></figure>
+
 <p>重启Samba服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart smbd</span><br></pre></td></tr></table></figure>
 
 <h2 id="4、开启防火墙"><a href="#4、开启防火墙" class="headerlink" title="4、开启防火墙"></a>4、开启防火墙</h2><p>安装</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y ufw</span><br></pre></td></tr></table></figure>
+
 <p>启用UFW</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw enable</span><br><span class="line">sudo ufw status</span><br></pre></td></tr></table></figure>
+
+<p>允许ssh链接，（！不然就连不进来了）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow ssh</span><br></pre></td></tr></table></figure>
+
 <p>添加允许 Samba 服务通过的规则。Samba 默认使用 TCP&#x2F;UDP 端口 137、138、139 和 445</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow 137/tcp</span><br><span class="line">sudo ufw allow 137/udp</span><br><span class="line">sudo ufw allow 138/tcp</span><br><span class="line">sudo ufw allow 138/udp</span><br><span class="line">sudo ufw allow 139/tcp</span><br><span class="line">sudo ufw allow 445/tcp</span><br></pre></td></tr></table></figure>
 
+<h2 id="5、安装Casaos"><a href="#5、安装Casaos" class="headerlink" title="5、安装Casaos"></a>5、安装Casaos</h2><p>更换中国科技大学软件源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">备份源文件</span></span><br><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo vim /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line">替换</span><br><span class="line">deb http://mirrors.ustc.edu.cn/debian/ buster main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/debian/ buster main non-free contrib</span><br><span class="line"></span><br><span class="line">deb http://mirrors.ustc.edu.cn/debian-security buster/updates main</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/debian-security buster/updates main</span><br><span class="line"></span><br><span class="line">deb http://mirrors.ustc.edu.cn/debian/ buster-updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/debian/ buster-updates main non-free contrib</span><br><span class="line"></span><br><span class="line">deb http://mirrors.ustc.edu.cn/debian/ buster-backports main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/debian/ buster-backports main non-free contrib</span><br></pre></td></tr></table></figure>
 
-<h1 id="！！！！！！！！！！"><a href="#！！！！！！！！！！" class="headerlink" title="！！！！！！！！！！"></a>！！！！！！！！！！</h1><h2 id="完蛋了，22-端口忘记开了"><a href="#完蛋了，22-端口忘记开了" class="headerlink" title="完蛋了，22 端口忘记开了"></a>完蛋了，22 端口忘记开了</h2></div>
+<p>安装casaos</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">casaoswget -qO- https://get.icewhale.io/casaos.sh | bash</span><br></pre></td></tr></table></figure>
+
+<a href="/2024/10/30/%E6%88%91%E5%AE%B6%E4%BA%91%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/casaos.jpg" class="gallery-item" style="box-shadow: none;"> <img src="/2024/10/30/%E6%88%91%E5%AE%B6%E4%BA%91%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/casaos.jpg" class title="This is an test image"></a>
+
+</div>
     </div>
 
     <div class="post-meta">
