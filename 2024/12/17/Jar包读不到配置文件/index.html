@@ -4,7 +4,7 @@
     <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <meta name="description" content="tags" />
+    <meta name="description" content="Jar包读不到配置文件" />
     <meta name="hexo-theme-A4" content="v1.9.6" />
     <link rel="alternate icon" type="image/webp" href="/images/favicon.jpg">
     <title>Stonesmover</title>
@@ -151,41 +151,125 @@
 </div> 
         
                     
-                            <br>
-<span><span class="darkmode-ignore">📌</span><i>tags</i></span>
-<ul class="inline-ul" >
-
-  
-
-  
-
-  
-
-  
-  
-  
-  
-      
-        <li class="inline-li">
-            <a href="/tags/%E6%88%91%E5%AE%B6%E4%BA%91">我家云</a>
-            <span><i>1</i></span>
-        </li>
-    
-        <li class="inline-li">
-            <a href="/tags/Jar">Jar</a>
-            <span><i>1</i></span>
-        </li>
-    
-    
-</ul>
-
-                    
                     
 
                     
                     
                     
                     <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    Jar包读不到配置文件
+                </div>
+            
+        
+      
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2024-12-17</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：104</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：1分钟</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span id="busuanzi_container_page_pv">
+                        阅读量：<span id="busuanzi_value_page_pv"></span>次
+                    </span>
+                
+            </div>
+    
+
+    <div class="post-md">
+        
+        <div class=".article-gallery"><p>打Jar 包后执行，一直报错读不到配置文件，但是IDEA里却正常</p>
+<p>问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(OpenSDK.init(<span class="string">&quot;src/main/resources/conf/config.properties&quot;</span>, priKey))&#123;</span><br><span class="line">           log.info(<span class="string">&quot;宁波银行接口opensdk 开始执行初始化 ！&quot;</span>);</span><br><span class="line">       &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>应该使用绝对路径</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">configFilePath</span> <span class="operator">=</span> <span class="string">&quot;C:/projects/bank/src/main/resources/conf/config.properties&quot;</span>;</span><br><span class="line">       <span class="keyword">if</span> (OpenSDK.init(configFilePath, priKey)) &#123;</span><br><span class="line">           log.info(<span class="string">&quot;宁波银行接口opensdk 开始执行初始化 ！&quot;</span>);</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure></div>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2024-12-17</span>
+            
+                <span>该篇文章被 Stonesmover</span>
+            
+            
+                <span>打上标签:
+                    
+                    
+                        <a href='/tags/Jar/'>
+                            Jar
+                        </a>
+                    
+                </span>
+             
+             
+                <span>归为分类:
+                    
+                    
+                        <a href='/categories/Java/'>
+                            Java
+                        </a>
+                    
+                </span>
+            
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2024/10/30/%E6%88%91%E5%AE%B6%E4%BA%91%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/">我家云折腾记录</a>
+                    </span>
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+                                      
                     
                     
                     <div class="footer">

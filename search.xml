@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Jar包读不到配置文件</title>
+    <url>/2024/12/17/Jar%E5%8C%85%E8%AF%BB%E4%B8%8D%E5%88%B0%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<div class=".article-gallery"><p>打Jar 包后执行，一直报错读不到配置文件，但是IDEA里却正常</p>
+<p>问题</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(OpenSDK.init(<span class="string">&quot;src/main/resources/conf/config.properties&quot;</span>, priKey))&#123;</span><br><span class="line">           log.info(<span class="string">&quot;宁波银行接口opensdk 开始执行初始化 ！&quot;</span>);</span><br><span class="line">       &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>应该使用绝对路径</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">configFilePath</span> <span class="operator">=</span> <span class="string">&quot;C:/projects/bank/src/main/resources/conf/config.properties&quot;</span>;</span><br><span class="line">       <span class="keyword">if</span> (OpenSDK.init(configFilePath, priKey)) &#123;</span><br><span class="line">           log.info(<span class="string">&quot;宁波银行接口opensdk 开始执行初始化 ！&quot;</span>);</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure></div>]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Jar</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>我家云折腾记录</title>
     <url>/2024/10/30/%E6%88%91%E5%AE%B6%E4%BA%91%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<div class=".article-gallery"><p>本来已经根据<a href="https://post.smzdm.com/p/az50epz5/">阿文菌</a>的文章刷好了，但是想刷一个干净的固件自己学习一下</p>
@@ -69,6 +85,9 @@
 <a href="/2024/10/30/%E6%88%91%E5%AE%B6%E4%BA%91%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/casaos.jpg" class="gallery-item" style="box-shadow: none;"> <img src="/2024/10/30/%E6%88%91%E5%AE%B6%E4%BA%91%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/casaos.jpg" class title="This is an test image"></a>
 
 </div>]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
       <tags>
         <tag>我家云</tag>
       </tags>
